@@ -126,7 +126,7 @@ def classify_content(content: str) -> Classification:
         tags.append("secret")
 
     first_line = text.splitlines()[0] if text else ""
-    summary = first_line[:90] or kind
+    summary = (mask_secret(first_line) if is_secret else first_line[:90]) or kind
     preview = mask_secret(first_line) if is_secret else first_line[:160]
 
     deduped_tags = list(dict.fromkeys(tags))

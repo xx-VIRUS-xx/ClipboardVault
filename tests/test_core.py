@@ -10,6 +10,19 @@ class CoreTests(unittest.TestCase):
         self.assertIn("secret", result.tags)
         self.assertIn("...", result.masked_preview)
 
+    def test_secret_summary_never_contains_the_secret(self):
+        key = "sk-abcdefghijklmnopqrstuvwxyz123456"
+        for content in (key, f"OPENAI_API_KEY={key}", f"{key}\nsecond line"):
+            result = classify_content(content)
+            self.assertEqual(result.sensitivity, "high")
+            self.assertNotIn(key, result.summary)
+            self.assertNotIn(key, result.masked_preview)
+            self.assertIn("...", result.summary)
+
+    def test_non_secret_summary_is_unchanged(self):
+        result = classify_content("buy milk and eggs")
+        self.assertEqual(result.summary, "buy milk and eggs")
+
     def test_json_credential_classification(self):
         result = classify_content('{"api_key": "abc123", "name": "demo"}')
         self.assertEqual(result.kind, "credential-json")
