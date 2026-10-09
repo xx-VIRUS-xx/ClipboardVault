@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Local Clipboard Vault</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="capture">
+        <div class="capture-head">
+          <div>
+            <p class="eyebrow">Local encrypted clipboard</p>
+            <h1>Clipboard Vault</h1>
+          </div>
+          <div class="vault-state" id="vaultState">Locked</div>
+        </div>
+
+        <label class="field">
+          <span>Vault passphrase</span>
+          <input id="passphrase" type="password" autocomplete="current-password" placeholder="Required to save or reveal">
+        </label>
+
+        <div class="toolbar">
+          <button id="readClipboard" class="primary" type="button">Read Clipboard</button>
+          <button id="pasteSample" type="button">Use Text Area</button>
+          <label class="check">
+            <input id="favorite" type="checkbox">
+            <span>Favorite</span>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Copied content</span>
+          <textarea id="content" spellcheck="false" placeholder="Paste an API key, token, URL, JSON, command, note, or code snippet"></textarea>
+        </label>
+
+        <div class="pipeline" id="pipeline">
+          <span>Waiting for content</span>
+        </div>
+
+        <div class="grid-two">
+          <label class="field">
+            <span>Title</span>
+            <input id="title" type="text" placeholder="Auto generated if empty">
+          </label>
+          <label class="field">
+            <span>Tags</span>
+            <input id="tags" type="text" placeholder="comma separated">
+          </label>
+        </div>
+
+        <button id="saveItem" class="save" type="button">Save Encrypted Item</button>
+        <p class="notice" id="notice"></p>
+      </section>
+
+      <section class="library">
+        <div class="library-head">
+          <div>
+            <p class="eyebrow">Saved for later</p>
+            <h2>Vault Items</h2>
+          </div>
+          <input id="search" type="search" placeholder="Search title, tags, type">
+        </div>
+        <div class="filters" id="filters"></div>
+        <div class="items" id="items"></div>
+      </section>
+    </main>
+
+    <dialog id="revealDialog">
+      <div class="dialog-head">
+        <div>
+          <p class="eyebrow" id="revealKind">Secret</p>
+          <h3 id="revealTitle">Reveal item</h3>
+        </div>
+        <button id="closeDialog" type="button" aria-label="Close">x</button>
+      </div>
+      <pre id="revealedContent"></pre>
+      <div class="dialog-actions">
+        <button id="copyRevealed" class="primary" type="button">Copy</button>
+      </div>
+    </dialog>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+#!/bin/zsh
+APP_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+cd "$APP_DIR"
+exec /usr/bin/env python3 desktop_app.py
