@@ -1,0 +1,17 @@
+# Vault data: never commit
+clipboard_vault.sqlite3
+*.sqlite
+*.sqlite3
+*.db
+.env
+.env.*
+
+# Python
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
